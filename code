@@ -1,0 +1,44 @@
+import java.util.Stack;
+import java.util.Scanner;
+class HelloWorld{
+    public static void main(String args[])
+    {
+        Scanner sc=new Scanner(System.in);
+        String str=sc.nextLine();
+        int result=findMaxLen(str);
+        System.out.println(result);
+    }
+    
+    
+
+
+
+    static int findMaxLen( String s)
+    {
+        int n=s.length();
+        int result=0,max=0;
+        int i;
+        Stack<Integer> stk=new Stack<>();
+        stk.push(-1);
+        for(i=0;i<n;i++)
+        {
+            if(s.charAt(i)=='(')
+            {
+                stk.push(i);
+            }
+            else{
+                stk.pop();
+                if(!stk.empty())
+                {
+                     result=Math.max(result,i-stk.peek());
+                }
+                else
+                {
+                    stk.push(i);
+                }
+            }
+           
+        }
+        return result;
+    }
+}
